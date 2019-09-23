@@ -2,7 +2,7 @@ version: '3.2'
 services:
 
   rabbitmqinit:
-    container_name: senzing-volume-permissions
+    container_name: senzing-rabbitmq-init
     image: bitnami/minideb:stretch
     command: ["/bin/chown", "-R", "1001:1001", "/bitnami"]    
     networks:
