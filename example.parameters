@@ -1,0 +1,8 @@
+SENZING_ACCEPT_EULA: I_ACCEPT_THE_SENZING_EULA
+
+POSTGRES_DIR:     /tmp/my-senzing/postgres
+RABBITMQ_DIR:     /tmp/my-senzing/rabbitmq
+SENZING_DATA_DIR: /opt/my-senzing/data
+SENZING_G2_DIR :  /opt/my-senzing/g2
+SENZING_ETC_DIR:  /opt/my-senzing/etc
+SENZING_VAR_DIR:  /opt/my-senzing/var
