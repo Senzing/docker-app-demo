@@ -76,6 +76,7 @@ This repository assumes a working knowledge of:
 The following software programs need to be installed:
 
 1. [docker](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-docker.md)
+1. [docker-compose](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-docker-compose.md)
 1. [docker-app](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-docker-app.md)
 
 ### Pull docker images
@@ -140,7 +141,7 @@ An example of a parameters file is [example.parameters](example.parameters).
     export DOCKER_APP="docker app"
     ```
 
-1. :pencil2: Identify parameters file location.
+1. :pencil2: Identify location of parameters file.
    Example:
 
     ```console
