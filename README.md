@@ -178,9 +178,10 @@ The following brings up the docker formation seen in the
 
 ## View data
 
-1. Username and password for the following sites were either passed in as environment variables
-   or are the default values seen in
-   [docker-compose-rabbitmq-postgresql.yaml](../../resources/postgresql/docker-compose-rabbitmq-postgresql.yaml).
+1. Username and password for the following sites were either
+   defined in the default parameters file,
+   [senzing-demo.dockerapp/parameters.yml](senzing-demo.dockerapp/parameters.yml)
+   or in the [created parameters file](#create-parameters-file).
 
 ### View docker containers
 
