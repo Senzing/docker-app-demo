@@ -1,5 +1,58 @@
 # docker-app-demo
 
+## Overview
+
+This repository illustrates a reference implementation of Senzing using
+RabbitMQ as the queue and
+PostgreSQL as the underlying database.
+
+The instructions show how to set up a system that:
+
+1. Reads JSON lines from a file on the internet.
+1. Sends each JSON line to a message queue.
+    1. In this implementation, the queue is RabbitMQ.
+1. Reads messages from the queue and inserts into Senzing.
+    1. In this implementation, Senzing keeps its data in a PostgreSQL database.
+1. Reads information from Senzing via [Senzing REST API](https://github.com/Senzing/senzing-rest-api) server.
+1. Views resolved entities in a [web app](https://github.com/Senzing/entity-search-web-app).
+
+The following diagram shows the relationship of the docker containers in this docker composition.
+Arrows represent data flow.
+
+![Image of architecture](docs/docker-app-rabbitmq-postgresql/architecture.png)
+
+This docker formation brings up the following docker containers:
+
+1. *[bitnami/rabbitmq](https://github.com/bitnami/bitnami-docker-rabbitmq)*
+1. *[dockage/phppgadmin](https://hub.docker.com/r/dockage/phppgadmin)*
+1. *[postgres](https://hub.docker.com/_/postgres)*
+1. *[senzing/entity-web-search-app](https://github.com/Senzing/entity-search-web-app)*
+1. *[senzing/mock-data-generator](https://github.com/Senzing/mock-data-generator)*
+1. *[senzing/senzing-api-server](https://github.com/Senzing/senzing-api-server)*
+1. *[senzing/stream-loader](https://github.com/Senzing/stream-loader)*
+
+### Contents
+
+1. [Expectations](#expectations)
+    1. [Space](#space)
+    1. [Time](#time)
+    1. [Background knowledge](#background-knowledge)
+1. [Preparation](#preparation)
+    1. [Prerequisite software](#prerequisite-software)
+    1. [Pull docker images](#pull-docker-images)
+    1. [Create parameters file](#create-parameters-file)
+1. [Using docker-app](#using-docker-app)
+    1. [Set environment variables(]#set-environment-variables)
+    1. [Install Senzing](#install-senzing)
+    1. [Run docker formation](#run-docker-formation)
+1. [View data](#view-data)
+    1. [View RabbitMQ](#view-rabbitmq)
+    1. [View PostgreSQL](#view-postgresql)
+    1. [View Senzing API](#view-senzing-api)
+    1. [View Senzing Entity Search WebApp](#view-senzing-entity-search-webapp)
+1. [Cleanup](#cleanup)
+1. [References](#references)
+
 ## Expectations
 
 ### Space
@@ -44,13 +97,30 @@ The following software programs need to be installed:
     sudo docker pull senzing/yum:1.1.0
     ```
 
-## Using docker-app
-
 ### Create parameters file
 
-FIXME:
+The [docker app render](https://docs.docker.com/engine/reference/commandline/app_render)
+command accepts a `--parameters-file` parameter which is
+the location of a file of parameters tailored to a specific environment.
+An example of a parameters file is [example.parameters](examples.parameters).
 
-[example.parameters](examples.parameters)
+1. Default values can be seen in the following files:
+    1. [senzing-demo.dockerapp/parameters.yml](senzing-demo.dockerapp/parameters.yml)
+    1. [senzing-install.dockerapp/parameters.yml](senzing-install.dockerapp/parameters.yml)
+
+1. :pencil2: Create a parameters file, for example `/tmp/senzing-docker-app-demo.parameters`,
+   having values that override default values.
+   Examples:
+
+    1. [POSTGRES_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#postgres_dir)
+    1. [RABBITMQ_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#rabbitmq_dir)
+    1. [SENZING_ACCEPT_EULA](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_accept_eula)
+    1. [SENZING_DATA_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_data_dir)
+    1. [SENZING_G2_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_g2_dir)
+    1. [SENZING_ETC_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_etc_dir)
+    1. [SENZING_VAR_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_var_dir)
+
+## Using docker-app
 
 ### Set environment variables
 
@@ -71,17 +141,19 @@ FIXME:
     export DOCKER_APP="docker app"
     ```
 
-1. :pencil2: Parameters.
+1. :pencil2: Identify parameters file location.
+   Example:
 
     ```console
-    export DOCKER_APP_PARAMETERS_FILE="/tmp/example.parameters"
+    export DOCKER_APP_PARAMETERS_FILE="/tmp/senzing-docker-app-demo.parameters"
     ```
 
 ### Install Senzing
 
-One-time ...  (FIXME:)
+The following installs the Senzing code and model data.
 
-1. XXX
+1. Run docker-app.
+   Example:
 
     ```console
     ${DOCKER_APP} render \
@@ -92,7 +164,11 @@ One-time ...  (FIXME:)
 
 ### Run docker formation
 
-1. XXX
+The following brings up the docker formation seen in the
+[Overview](#overview).
+
+1. Run docker-app.
+   Example:
 
     ```console
     ${DOCKER_APP} render \
@@ -164,7 +240,7 @@ One-time ...  (FIXME:)
 
 ## Cleanup
 
-1. Bring down.
+1. Bring down docker formation.
    Example:
 
     ```console
