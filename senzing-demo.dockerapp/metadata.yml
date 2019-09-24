@@ -1,0 +1,6 @@
+version: 0.1.0
+name: senzing-demo
+description: Demonstrate Senzing
+maintainers:
+  - name: Senzing
+    email: support@senzing.com
