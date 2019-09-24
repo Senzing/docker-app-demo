@@ -104,9 +104,8 @@ command accepts a `--parameters-file` parameter which is
 the location of a file of parameters tailored to a specific environment.
 An example of a parameters file is [example.parameters](examples.parameters).
 
-1. Default values can be seen in the following files:
-    1. [senzing-demo.dockerapp/parameters.yml](senzing-demo.dockerapp/parameters.yml)
-    1. [senzing-install.dockerapp/parameters.yml](senzing-install.dockerapp/parameters.yml)
+1. Default values can be seen in
+   [senzing-demo.dockerapp/parameters.yml](senzing-demo.dockerapp/parameters.yml).
 
 1. :pencil2: Create a parameters file, for example `/tmp/senzing-docker-app-demo.parameters`,
    having values that override default values.
