@@ -158,7 +158,7 @@ The following installs the Senzing code and model data.
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-install \
+      senzing/docker-app-senzing-install:0.1.0 \
       | docker-compose -f - up
     ```
 
@@ -173,7 +173,7 @@ The following brings up the docker formation seen in the
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-demo \
+      senzing/docker-app-senzing-demo:0.1.0 \
       | docker-compose -f - up
     ```
 
@@ -247,14 +247,14 @@ The following brings up the docker formation seen in the
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-demo \
+      senzing/docker-app-senzing-demo:0.1.0 \
       | docker-compose -f - down
     ```
 
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-install \
+      senzing/docker-app-senzing-install:0.1.0 \
       | docker-compose -f - down
     ```
 
