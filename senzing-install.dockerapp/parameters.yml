@@ -1,5 +1,5 @@
 POSTGRES_DB: G2
-POSTGRES_DIR:  /var/lib/pgsql/data
+POSTGRES_DIR: /var/lib/pgsql/data
 POSTGRES_PASSWORD: postgres
 POSTGRES_USERNAME: postgres
 RABBITMQ_DIR: /var/lib/rabbitmq
