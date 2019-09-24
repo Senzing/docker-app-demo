@@ -102,7 +102,7 @@ The following software programs need to be installed:
 The [docker app render](https://docs.docker.com/engine/reference/commandline/app_render)
 command accepts a `--parameters-file` parameter which is
 the location of a file of parameters tailored to a specific environment.
-An example of a parameters file is [example.parameters](examples.parameters).
+An example of a parameters file is [example.parameters](example.parameters).
 
 1. Default values can be seen in
    [senzing-demo.dockerapp/parameters.yml](senzing-demo.dockerapp/parameters.yml).
