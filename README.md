@@ -113,7 +113,7 @@ the location of a file of parameters tailored to a specific environment.
    Example:
 
     ```console
-    export DOCKER_APP_INSTALL_PARAMETERS_FILE="/tmp/senzing-docker-app-install.parameters"
+    export DOCKER_APP_INSTALL_PARAMETERS_FILE=/tmp/senzing-docker-app-install.parameters
     ```
 
 #### Create parameters file for demonstration
@@ -131,7 +131,7 @@ the location of a file of parameters tailored to a specific environment.
    Example:
 
     ```console
-    export DOCKER_APP_DEMO_PARAMETERS_FILE="/tmp/senzing-docker-app-demo.parameters"
+    export DOCKER_APP_DEMO_PARAMETERS_FILE=/tmp/senzing-docker-app-demo.parameters
     ```
 
 #### Configuration
