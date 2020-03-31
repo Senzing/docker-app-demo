@@ -1,4 +1,5 @@
 SENZING_ACCEPT_EULA: false
+
 SENZING_DATA_DIR: /opt/senzing/data
 SENZING_ETC_DIR: /etc/opt/senzing
 SENZING_G2_DIR: /opt/senzing/g2
