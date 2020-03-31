@@ -257,6 +257,52 @@ The server supports the
       | docker-compose -f - down
     ```
 
+## Development
+
+
+1. Determine app version.
+
+    1. Manually set version.
+       Example:
+
+        ```console
+        export GIT_VERSION=1.0.0
+        ```
+
+    1. Pull version from Git repository.
+       Example:
+
+        ```console
+        export GIT_VERSION=$(git describe --always --tags --long --dirty | sed -e 's/\-0//' -e 's/\-g.......//')
+        ```
+
+    1. Verify version:
+       Example:
+
+        ```console
+        echo ${GIT_VERSION}
+        ```
+
+1. Push docker apps to DockerHub
+
+    1. Push install app.
+       Example:
+
+        ```console
+        ${DOCKER_APP} push \
+          --tag senzing/docker-app-senzing-install:${GIT_VERSION} \
+          senzing-install.dockerapp
+        ```
+
+    1. Push demo app.
+       Example:
+
+        ```console
+        ${DOCKER_APP} push \
+          --tag senzing/docker-app-senzing-demo:${GIT_VERSION} \
+          senzing-demo.dockerapp
+        ```
+
 ## References
 
 1. Docker app
