@@ -101,10 +101,15 @@ An example of a parameters file is [example.parameters](example.parameters).
 1. Default values can be seen in
    [senzing-demo.dockerapp/parameters.yml](senzing-demo.dockerapp/parameters.yml).
 
-1. :pencil2: Create a parameters file, for example `/tmp/senzing-docker-app-demo.parameters`,
+1. :pencil2: Create a parameters file.
+   For example,
+   `/tmp/senzing-docker-app-demo.parameters`
    having values that override default values.
-   Examples:
+   [example.parameters](example.parameters) is an example of such a file.
 
+1. Configuration values:
+
+    1. [JUPYTER_NOTEBOOKS_SHARED_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#jupyter_notebooks_shared_dir)
     1. [POSTGRES_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#postgres_dir)
     1. [RABBITMQ_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#rabbitmq_dir)
     1. [SENZING_ACCEPT_EULA](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_accept_eula)
@@ -151,7 +156,7 @@ The following installs the Senzing code and model data.
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-install:0.1.0 \
+      senzing/docker-app-senzing-install:1.0.0 \
       | docker-compose -f - up
     ```
 
@@ -166,7 +171,7 @@ The following brings up the docker formation seen in the
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-demo:0.1.0 \
+      senzing/docker-app-senzing-demo:1.0.0 \
       | docker-compose -f - up
     ```
 
@@ -246,19 +251,20 @@ The server supports the
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-demo:0.1.0 \
+      senzing/docker-app-senzing-demo:1.0.0 \
       | docker-compose -f - down
     ```
 
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-install:0.1.0 \
+      senzing/docker-app-senzing-install:1.0.0 \
       | docker-compose -f - down
     ```
 
 ## Development
 
+The following steps are performed inside a local git repository directory for `docker-app-demo`.
 
 1. Determine app version.
 
