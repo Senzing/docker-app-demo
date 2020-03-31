@@ -26,7 +26,10 @@ This docker formation brings up the following docker containers:
 1. *[bitnami/rabbitmq](https://github.com/bitnami/bitnami-docker-rabbitmq)*
 1. *[dockage/phppgadmin](https://hub.docker.com/r/dockage/phppgadmin)*
 1. *[postgres](https://hub.docker.com/_/postgres)*
+1. *[senzing/debug](https://github.com/Senzing/docker-senzing-debug)*
 1. *[senzing/entity-web-search-app](https://github.com/Senzing/entity-search-web-app)*
+1. *[senzing/init-container](https://github.com/Senzing/docker-init-container)*
+1. *[senzing/jupyter](https://github.com/Senzing/docker-jupyter)*
 1. *[senzing/mock-data-generator](https://github.com/Senzing/mock-data-generator)*
 1. *[senzing/senzing-api-server](https://github.com/Senzing/senzing-api-server)*
 1. *[senzing/stream-loader](https://github.com/Senzing/stream-loader)*
@@ -39,17 +42,18 @@ This docker formation brings up the following docker containers:
     1. [Background knowledge](#background-knowledge)
 1. [Preparation](#preparation)
     1. [Prerequisite software](#prerequisite-software)
-    1. [Pull docker images](#pull-docker-images)
     1. [Create parameters file](#create-parameters-file)
 1. [Using docker-app](#using-docker-app)
     1. [Set environment variables(]#set-environment-variables)
     1. [Install Senzing](#install-senzing)
     1. [Run docker formation](#run-docker-formation)
 1. [View data](#view-data)
+    1. [View docker containers](#view-docker-containers)
     1. [View RabbitMQ](#view-rabbitmq)
     1. [View PostgreSQL](#view-postgresql)
     1. [View Senzing API](#view-senzing-api)
     1. [View Senzing Entity Search WebApp](#view-senzing-entity-search-webapp)
+    1. [View Jupyter notebooks](#view-jupyter-notebooks)
 1. [Cleanup](#cleanup)
 1. [References](#references)
 
@@ -86,25 +90,6 @@ The following software programs need to be installed:
 1. [docker](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-docker.md)
 1. [docker-compose](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-docker-compose.md)
 1. [docker-app](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-docker-app.md)
-
-### Pull docker images
-
-1. :thinking: **Optional:** To speed up later steps, docker images may be pulled in advance.
-   Example:
-
-    ```console
-    sudo docker pull bitnami/minideb:stretch
-    sudo docker pull bitnami/rabbitmq:3.7.16
-    sudo docker pull jbergknoff/postgresql-client:latest
-    sudo docker pull postgres:11.3
-    sudo docker pull senzing/entity-search-web-app:1.0.2
-    sudo docker pull senzing/init-container:1.3.0
-    sudo docker pull senzing/mock-data-generator:1.1.0
-    sudo docker pull senzing/phppgadmin:1.0.0
-    sudo docker pull senzing/senzing-api-server:1.7.2
-    sudo docker pull senzing/stream-loader:1.2.0
-    sudo docker pull senzing/yum:1.1.0
-    ```
 
 ### Create parameters file
 
@@ -204,48 +189,54 @@ The following brings up the docker formation seen in the
 1. RabbitMQ is viewable at
    [localhost:15672](http://localhost:15672).
     1. **Defaults:** username: `user` password: `bitnami`
+1. See
+   [additional tips](https://github.com/Senzing/knowledge-base/blob/master/lists/docker-compose-demo-tips.md#rabbitmq)
+   for working with RabbitMQ.
 
 ### View PostgreSQL
 
 1. PostgreSQL is viewable at
    [localhost:9171](http://localhost:9171).
     1. **Defaults:** username: `postgres` password: `postgres`
-1. On left-hand navigation, select "G2" database to explore.
-1. The records received from the queue can be viewed in the following Senzing tables:
-    1. G2 > DSRC_RECORD
-    1. G2 > OBS_ENT
+1. See
+   [additional tips](https://github.com/Senzing/knowledge-base/blob/master/lists/docker-compose-demo-tips.md#postgresql)
+   for working with PostgreSQL.
 
 ### View Senzing API
 
-1. View results from Senzing REST API server.
-   The server supports the
-   [Senzing REST API](https://github.com/Senzing/senzing-rest-api).
+View results from Senzing REST API server.
+The server supports the
+[Senzing REST API](https://github.com/Senzing/senzing-rest-api).
 
-   1. From a web browser.
-      Examples:
-      1. [localhost:8250/heartbeat](http://localhost:8250/heartbeat)
-      1. [localhost:8250/license](http://localhost:8250/license)
-      1. [localhost:8250/entities/1](http://localhost:8250/entities/1)
-   1. From `curl`.
-      Examples:
-
-        ```console
-        export SENZING_API_SERVICE=http://localhost:8250
-
-        curl -X GET ${SENZING_API_SERVICE}/heartbeat
-        curl -X GET ${SENZING_API_SERVICE}/license
-        curl -X GET ${SENZING_API_SERVICE}/entities/1
-        ```
-
-   1. From [OpenApi "Swagger" editor](http://editor.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api/master/senzing-rest-api.yaml).
+1. View REST API using [OpenApi "Swagger" editor](http://editor.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api/master/senzing-rest-api.yaml).
+1. Example Senzing REST API request:
+   [localhost:8250/heartbeat](http://localhost:8250/heartbeat)
+1. See
+   [additional tips](https://github.com/Senzing/knowledge-base/blob/master/lists/docker-compose-demo-tips.md#senzing-api-server)
+   for working with Senzing API server.
 
 ### View Senzing Entity Search WebApp
 
 1. Senzing Entity Search WebApp is viewable at
    [localhost:8251](http://localhost:8251).
+1. See
+   [additional tips](https://github.com/Senzing/knowledge-base/blob/master/lists/docker-compose-demo-tips.md#senzing-entity-search-webapp)
+   for working with Senzing Entity Search WebApp.
 
-1. The [demonstration](https://github.com/Senzing/knowledge-base/blob/master/demonstrations/docker-compose-web-app.md)
-   instructions will give a tour of the Senzing web app.
+### View Jupyter notebooks
+
+1. Change file permissions on PostgreSQL database.
+   Example:
+
+    ```console
+    sudo chmod 777 -R ${SENZING_VAR_DIR}/postgres
+    ```
+
+1. Jupyter Notebooks are viewable at
+   [localhost:9178](http://localhost:9178).
+1. See
+   [additional tips](https://github.com/Senzing/knowledge-base/blob/master/lists/docker-compose-demo-tips.md#jupyter-notebooks)
+   for working with Jupyter Notebooks.
 
 ## Cleanup
 
