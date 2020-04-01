@@ -154,13 +154,13 @@ the location of a file of parameters tailored to a specific environment.
    it may be invoked by either `docker app` or `docker-app`.
    Identify which invocation method is being used.
 
-   **Example #1**  Docker App stand-alone.
+   **Option #1**  Docker App stand-alone.
 
     ```console
     export DOCKER_APP="docker-app"
     ```
 
-   **Example #2**  Docker App CLI plugin.
+   **Option #2**  Docker App CLI plugin.
 
     ```console
     export DOCKER_APP="docker app"
