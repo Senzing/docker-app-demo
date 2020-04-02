@@ -250,13 +250,6 @@ The server supports the
 
 ### View Jupyter notebooks
 
-1. Change file permissions on PostgreSQL database.
-   Example:
-
-    ```console
-    sudo chmod 777 -R ${SENZING_VAR_DIR}/postgres
-    ```
-
 1. Jupyter Notebooks are viewable at
    [localhost:9178](http://localhost:9178).
 1. See
