@@ -176,7 +176,7 @@ The following installs the Senzing code and model data.
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_INSTALL_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-install:1.0.0 \
+      senzing/docker-app-senzing-install:0.2.0 \
       | docker-compose -f - up
     ```
 
@@ -191,7 +191,7 @@ The following brings up the docker formation seen in the
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_DEMO_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-demo:1.0.0 \
+      senzing/docker-app-senzing-demo:0.2.0 \
       | docker-compose -f - up
     ```
 
@@ -271,14 +271,14 @@ The server supports the
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-demo:1.0.0 \
+      senzing/docker-app-senzing-demo:0.2.0 \
       | docker-compose -f - down
     ```
 
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-install:1.0.0 \
+      senzing/docker-app-senzing-install:0.2.0 \
       | docker-compose -f - down
     ```
 
@@ -292,7 +292,7 @@ The following steps are performed inside a local git repository directory for `d
        Example:
 
         ```console
-        export GIT_VERSION=1.0.0
+        export GIT_VERSION=0.2.0
         ```
 
     1. Pull version from Git repository.
