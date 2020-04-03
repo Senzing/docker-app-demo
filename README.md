@@ -24,13 +24,15 @@ Arrows represent data flow.
 This docker formation brings up the following docker containers:
 
 1. *[bitnami/rabbitmq](https://github.com/bitnami/bitnami-docker-rabbitmq)*
-1. *[dockage/phppgadmin](https://hub.docker.com/r/dockage/phppgadmin)*
 1. *[postgres](https://hub.docker.com/_/postgres)*
 1. *[senzing/debug](https://github.com/Senzing/docker-senzing-debug)*
 1. *[senzing/entity-web-search-app](https://github.com/Senzing/entity-search-web-app)*
 1. *[senzing/init-container](https://github.com/Senzing/docker-init-container)*
 1. *[senzing/jupyter](https://github.com/Senzing/docker-jupyter)*
 1. *[senzing/mock-data-generator](https://github.com/Senzing/mock-data-generator)*
+1. *[senzing/phppgadmin](https://hub.docker.com/r/senzing/phppgadmin)*
+1. *[senzing/postgresql-client](https://github.com/Senzing/postgresql-client)*
+1. *[senzing/redoer](https://github.com/Senzing/redoer)*
 1. *[senzing/senzing-api-server](https://github.com/Senzing/senzing-api-server)*
 1. *[senzing/stream-loader](https://github.com/Senzing/stream-loader)*
 
@@ -137,6 +139,8 @@ The following installs the Senzing code and model data.
       | docker-compose -f - up
     ```
 
+1. **Note:** This may take a while to download.
+
 ### Run docker formation
 
 The following brings up the docker formation seen in the
@@ -150,6 +154,8 @@ The following brings up the docker formation seen in the
       senzing/docker-app-senzing-demo:0.3.0 \
       | docker-compose -f - up
     ```
+
+1. **Note:** Errors may be seen in the log until all dependent services are running.
 
 ## View data
 
