@@ -244,18 +244,21 @@ The server supports the
 
 ## Cleanup
 
-1. Bring down docker formation.
+1. Bring down installation docker formation.
+   Example:
+
+    ```console
+    ${DOCKER_APP} render \
+      senzing/docker-app-senzing-install \
+      | docker-compose -f - down
+    ```
+
+1. Bring down demonstration docker formation.
    Example:
 
     ```console
     ${DOCKER_APP} render \
       senzing/docker-app-senzing-demo \
-      | docker-compose -f - down
-    ```
-
-    ```console
-    ${DOCKER_APP} render \
-      senzing/docker-app-senzing-install \
       | docker-compose -f - down
     ```
 
