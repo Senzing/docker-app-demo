@@ -127,6 +127,8 @@ The following software programs need to be installed:
     docker-app version v0.8.0, build 7eea32b7
     ```
 
+   **Warning:** make sure it is not just the version of `Docker`.
+
 ### EULA
 
 To use the Senzing code, you must agree to the End User License Agreement (EULA).
