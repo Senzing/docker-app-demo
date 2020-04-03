@@ -57,6 +57,9 @@ This docker formation brings up the following docker containers:
     1. [View Senzing Entity Search WebApp](#view-senzing-entity-search-webapp)
     1. [View Jupyter notebooks](#view-jupyter-notebooks)
 1. [Cleanup](#cleanup)
+1. [Advanced](#advanced)
+    1. [Create parameters files](#create-parameters-files)
+    1. [Using docker-app - Advanced](#using-docker-app---Advanced)
 1. [Development](#development)
 1. [References](#references)
 
@@ -231,6 +234,100 @@ The server supports the
     ```
 
 1. All data was stored in `~/senzing-docker-app-demo`.  The directory can be safely removed.
+
+## Advanced
+
+### Create parameters files
+
+The [docker app render](https://docs.docker.com/engine/reference/commandline/app_render)
+command accepts a `--parameters-file` parameter which is
+the location of a file of parameters tailored to a specific environment.
+
+#### Create parameters file for installation
+
+1. Default values can be seen in
+   [senzing-install.dockerapp/parameters.yml](senzing-install.dockerapp/parameters.yml).
+
+1. An example of a parameters file for installation is [example-install.parameters](example-install.parameters).
+
+1. :pencil2: Create a parameters file for installation.
+   For example,
+   `/tmp/senzing-docker-app-install.parameters`.
+
+1. :pencil2: Identify location of parameters file.
+   Example:
+
+    ```console
+    export DOCKER_APP_INSTALL_PARAMETERS_FILE=/tmp/senzing-docker-app-install.parameters
+    ```
+
+#### Create parameters file for demonstration
+
+1. Default values can be seen in
+   [senzing-demo.dockerapp/parameters.yml](senzing-demo.dockerapp/parameters.yml).
+
+1. An example of a parameters file for installation is [example-demo.parameters](example-demo.parameters).
+
+1. :pencil2: Create a parameters file for installation.
+   For example,
+   `/tmp/senzing-docker-app-demo.parameters`.
+
+1. :pencil2: Identify location of parameters file.
+   Example:
+
+    ```console
+    export DOCKER_APP_DEMO_PARAMETERS_FILE=/tmp/senzing-docker-app-demo.parameters
+    ```
+
+### Using docker-app - Advanced
+
+#### Set environment variables - Advanced
+
+1. :thinking: Depending on how
+   [docker app was installed](https://github.com/docker/app#installation),
+   it may be invoked by either `docker app` or `docker-app`.
+   Identify which invocation method is being used.
+
+   **Option #1**  Docker App stand-alone.
+
+    ```console
+    export DOCKER_APP="docker-app"
+    ```
+
+   **Option #2**  Docker App CLI plugin.
+
+    ```console
+    export DOCKER_APP="docker app"
+    ```
+
+#### Install Senzing - Advanced
+
+The following installs the Senzing code and model data.
+
+1. Run docker-app.
+   Example:
+
+    ```console
+    ${DOCKER_APP} render \
+      --parameters-file "${DOCKER_APP_INSTALL_PARAMETERS_FILE}" \
+      senzing/docker-app-senzing-install:0.3.0 \
+      | docker-compose -f - up
+    ```
+
+#### Run docker formation - Advanced
+
+The following brings up the docker formation seen in the
+[Overview](#overview).
+
+1. Run docker-app.
+   Example:
+
+    ```console
+    ${DOCKER_APP} render \
+      --parameters-file "${DOCKER_APP_DEMO_PARAMETERS_FILE}" \
+      senzing/docker-app-senzing-demo:0.3.0 \
+      | docker-compose -f - up
+    ```
 
 ## Development
 
