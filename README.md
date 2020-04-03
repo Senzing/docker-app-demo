@@ -118,6 +118,15 @@ The following software programs need to be installed:
     export DOCKER_APP="docker app"
     ```
 
+1. Test `DOCKER_APP`.
+   Example:
+
+    ```console
+    $ ${DOCKER_APP} -v
+
+    docker-app version v0.8.0, build 7eea32b7
+    ```
+
 ### EULA
 
 To use the Senzing code, you must agree to the End User License Agreement (EULA).
