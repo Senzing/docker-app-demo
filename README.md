@@ -59,7 +59,7 @@ This docker formation brings up the following docker containers:
 1. [Cleanup](#cleanup)
 1. [Advanced](#advanced)
     1. [Create parameters files](#create-parameters-files)
-    1. [Using docker-app - Advanced](#using-docker-app---Advanced)
+    1. [Using docker-app with parameters](#using-docker-app-with-parameters)
 1. [Development](#development)
 1. [References](#references)
 
@@ -279,7 +279,7 @@ the location of a file of parameters tailored to a specific environment.
     export DOCKER_APP_DEMO_PARAMETERS_FILE=/tmp/senzing-docker-app-demo.parameters
     ```
 
-### Using docker-app - Advanced
+### Using docker-app with parameters
 
 #### Set environment variables - Advanced
 
