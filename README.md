@@ -230,7 +230,7 @@ The server supports the
       | docker-compose -f - down
     ```
 
-1. All data was stored in
+1. All data was stored in `~/senzing-docker-app-demo`.  The directory can be safely removed.
 
 ## Development
 
