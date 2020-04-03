@@ -24,13 +24,15 @@ Arrows represent data flow.
 This docker formation brings up the following docker containers:
 
 1. *[bitnami/rabbitmq](https://github.com/bitnami/bitnami-docker-rabbitmq)*
-1. *[dockage/phppgadmin](https://hub.docker.com/r/dockage/phppgadmin)*
 1. *[postgres](https://hub.docker.com/_/postgres)*
 1. *[senzing/debug](https://github.com/Senzing/docker-senzing-debug)*
 1. *[senzing/entity-web-search-app](https://github.com/Senzing/entity-search-web-app)*
 1. *[senzing/init-container](https://github.com/Senzing/docker-init-container)*
 1. *[senzing/jupyter](https://github.com/Senzing/docker-jupyter)*
 1. *[senzing/mock-data-generator](https://github.com/Senzing/mock-data-generator)*
+1. *[senzing/phppgadmin](https://hub.docker.com/r/senzing/phppgadmin)*
+1. *[senzing/postgresql-client](https://github.com/Senzing/postgresql-client)*
+1. *[senzing/redoer](https://github.com/Senzing/redoer)*
 1. *[senzing/senzing-api-server](https://github.com/Senzing/senzing-api-server)*
 1. *[senzing/stream-loader](https://github.com/Senzing/stream-loader)*
 
@@ -42,9 +44,9 @@ This docker formation brings up the following docker containers:
     1. [Background knowledge](#background-knowledge)
 1. [Preparation](#preparation)
     1. [Prerequisite software](#prerequisite-software)
-    1. [Create parameters files](#create-parameters-files)
 1. [Using docker-app](#using-docker-app)
     1. [Set environment variables(]#set-environment-variables)
+    1. [EULA](#eula)
     1. [Install Senzing](#install-senzing)
     1. [Run docker formation](#run-docker-formation)
 1. [View data](#view-data)
@@ -55,6 +57,9 @@ This docker formation brings up the following docker containers:
     1. [View Senzing Entity Search WebApp](#view-senzing-entity-search-webapp)
     1. [View Jupyter notebooks](#view-jupyter-notebooks)
 1. [Cleanup](#cleanup)
+1. [Advanced](#advanced)
+    1. [Create parameters files](#create-parameters-files)
+    1. [Using docker-app with parameters](#using-docker-app-with-parameters)
 1. [Development](#development)
 1. [References](#references)
 
@@ -92,59 +97,6 @@ The following software programs need to be installed:
 1. [docker-compose](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-docker-compose.md)
 1. [docker-app](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-docker-app.md)
 
-### Create parameters files
-
-The [docker app render](https://docs.docker.com/engine/reference/commandline/app_render)
-command accepts a `--parameters-file` parameter which is
-the location of a file of parameters tailored to a specific environment.
-
-#### Create parameters file for installation
-
-1. Default values can be seen in
-   [senzing-install.dockerapp/parameters.yml](senzing-install.dockerapp/parameters.yml).
-
-1. An example of a parameters file for installation is [example-install.parameters](example-install.parameters).
-
-1. :pencil2: Create a parameters file for installation.
-   For example,
-   `/tmp/senzing-docker-app-install.parameters`.
-
-1. :pencil2: Identify location of parameters file.
-   Example:
-
-    ```console
-    export DOCKER_APP_INSTALL_PARAMETERS_FILE=/tmp/senzing-docker-app-install.parameters
-    ```
-
-#### Create parameters file for demonstration
-
-1. Default values can be seen in
-   [senzing-demo.dockerapp/parameters.yml](senzing-demo.dockerapp/parameters.yml).
-
-1. An example of a parameters file for installation is [example-demo.parameters](example-demo.parameters).
-
-1. :pencil2: Create a parameters file for installation.
-   For example,
-   `/tmp/senzing-docker-app-demo.parameters`.
-
-1. :pencil2: Identify location of parameters file.
-   Example:
-
-    ```console
-    export DOCKER_APP_DEMO_PARAMETERS_FILE=/tmp/senzing-docker-app-demo.parameters
-    ```
-
-#### Configuration
-
-1. [JUPYTER_NOTEBOOKS_SHARED_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#jupyter_notebooks_shared_dir)
-1. [POSTGRES_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#postgres_dir)
-1. [RABBITMQ_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#rabbitmq_dir)
-1. [SENZING_ACCEPT_EULA](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_accept_eula)
-1. [SENZING_DATA_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_data_dir)
-1. [SENZING_G2_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_g2_dir)
-1. [SENZING_ETC_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_etc_dir)
-1. [SENZING_VAR_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_var_dir)
-
 ## Using docker-app
 
 ### Set environment variables
@@ -166,6 +118,16 @@ the location of a file of parameters tailored to a specific environment.
     export DOCKER_APP="docker app"
     ```
 
+### EULA
+
+To use the Senzing code, you must agree to the End User License Agreement (EULA).
+
+1. :warning: This step is intentionally tricky and not simply copy/paste.
+   This ensures that you make a conscious effort to accept the EULA.
+   Example:
+
+    <code>export SENZING_ACCEPT_EULA="&lt;the value from [this link](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_accept_eula)&gt;"</code>
+
 ### Install Senzing
 
 The following installs the Senzing code and model data.
@@ -175,10 +137,12 @@ The following installs the Senzing code and model data.
 
     ```console
     ${DOCKER_APP} render \
-      --parameters-file "${DOCKER_APP_INSTALL_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-install:0.2.0 \
+      --set SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \
+      senzing/docker-app-senzing-install:0.3.0 \
       | docker-compose -f - up
     ```
+
+1. **Note:** This may take a while to download.
 
 ### Run docker formation
 
@@ -190,17 +154,13 @@ The following brings up the docker formation seen in the
 
     ```console
     ${DOCKER_APP} render \
-      --parameters-file "${DOCKER_APP_DEMO_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-demo:0.2.0 \
+      senzing/docker-app-senzing-demo:0.3.0 \
       | docker-compose -f - up
     ```
 
-## View data
+1. **Note:** Errors may be seen in the log until all dependent services are running.
 
-1. Username and password for the following sites were either
-   defined in the default parameters file,
-   [senzing-demo.dockerapp/parameters.yml](senzing-demo.dockerapp/parameters.yml)
-   or in the [created parameters file](#create-parameters-files).
+## View data
 
 ### View docker containers
 
@@ -263,16 +223,110 @@ The server supports the
 
     ```console
     ${DOCKER_APP} render \
-      --parameters-file "${DOCKER_APP_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-demo:0.2.0 \
+      senzing/docker-app-senzing-demo:0.3.0 \
       | docker-compose -f - down
     ```
 
     ```console
     ${DOCKER_APP} render \
-      --parameters-file "${DOCKER_APP_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-install:0.2.0 \
+      senzing/docker-app-senzing-install:0.3.0 \
       | docker-compose -f - down
+    ```
+
+1. All data was stored in `~/senzing-docker-app-demo`.  The directory can be safely removed.
+
+## Advanced
+
+### Create parameters files
+
+The [docker app render](https://docs.docker.com/engine/reference/commandline/app_render)
+command accepts a `--parameters-file` parameter which is
+the location of a file of parameters tailored to a specific environment.
+
+#### Create parameters file for installation
+
+1. Default values can be seen in
+   [senzing-install.dockerapp/parameters.yml](senzing-install.dockerapp/parameters.yml).
+
+1. An example of a parameters file for installation is [example-install.parameters](example-install.parameters).
+
+1. :pencil2: Create a parameters file for installation.
+   For example,
+   `/tmp/senzing-docker-app-install.parameters`.
+
+1. :pencil2: Identify location of parameters file.
+   Example:
+
+    ```console
+    export DOCKER_APP_INSTALL_PARAMETERS_FILE=/tmp/senzing-docker-app-install.parameters
+    ```
+
+#### Create parameters file for demonstration
+
+1. Default values can be seen in
+   [senzing-demo.dockerapp/parameters.yml](senzing-demo.dockerapp/parameters.yml).
+
+1. An example of a parameters file for installation is [example-demo.parameters](example-demo.parameters).
+
+1. :pencil2: Create a parameters file for installation.
+   For example,
+   `/tmp/senzing-docker-app-demo.parameters`.
+
+1. :pencil2: Identify location of parameters file.
+   Example:
+
+    ```console
+    export DOCKER_APP_DEMO_PARAMETERS_FILE=/tmp/senzing-docker-app-demo.parameters
+    ```
+
+### Using docker-app with parameters
+
+#### Set environment variables - Advanced
+
+1. :thinking: Depending on how
+   [docker app was installed](https://github.com/docker/app#installation),
+   it may be invoked by either `docker app` or `docker-app`.
+   Identify which invocation method is being used.
+
+   **Option #1**  Docker App stand-alone.
+
+    ```console
+    export DOCKER_APP="docker-app"
+    ```
+
+   **Option #2**  Docker App CLI plugin.
+
+    ```console
+    export DOCKER_APP="docker app"
+    ```
+
+#### Install Senzing - Advanced
+
+The following installs the Senzing code and model data.
+
+1. Run docker-app.
+   Example:
+
+    ```console
+    ${DOCKER_APP} render \
+      --parameters-file "${DOCKER_APP_INSTALL_PARAMETERS_FILE}" \
+      senzing/docker-app-senzing-install:0.3.0 \
+      | docker-compose -f - up
+    ```
+
+#### Run docker formation - Advanced
+
+The following brings up the docker formation seen in the
+[Overview](#overview).
+
+1. Run docker-app.
+   Example:
+
+    ```console
+    ${DOCKER_APP} render \
+      --parameters-file "${DOCKER_APP_DEMO_PARAMETERS_FILE}" \
+      senzing/docker-app-senzing-demo:0.3.0 \
+      | docker-compose -f - up
     ```
 
 ## Development
@@ -285,7 +339,7 @@ The following steps are performed inside a local git repository directory for `d
        Example:
 
         ```console
-        export GIT_VERSION=0.2.0
+        export GIT_VERSION=0.3.0
         ```
 
     1. Pull version from Git repository.
@@ -321,6 +375,17 @@ The following steps are performed inside a local git repository directory for `d
           --tag senzing/docker-app-senzing-demo:${GIT_VERSION} \
           senzing-demo.dockerapp
         ```
+
+## Configuration
+
+1. [JUPYTER_NOTEBOOKS_SHARED_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#jupyter_notebooks_shared_dir)
+1. [POSTGRES_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#postgres_dir)
+1. [RABBITMQ_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#rabbitmq_dir)
+1. [SENZING_ACCEPT_EULA](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_accept_eula)
+1. [SENZING_DATA_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_data_dir)
+1. [SENZING_G2_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_g2_dir)
+1. [SENZING_ETC_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_etc_dir)
+1. [SENZING_VAR_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_var_dir)
 
 ## References
 
