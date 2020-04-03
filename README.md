@@ -143,13 +143,20 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
 The following installs the Senzing code and model data.
 
+1. :thinking: **Optional:** make sure you have the latest version.
+   Example:
+
+    ```console
+    ${DOCKER_APP} pull senzing/docker-app-senzing-install
+    ```
+
 1. Run docker-app.
    Example:
 
     ```console
     ${DOCKER_APP} render \
       --set SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \
-      senzing/docker-app-senzing-install:0.3.0 \
+      senzing/docker-app-senzing-install \
       | docker-compose -f - up
     ```
 
@@ -160,12 +167,19 @@ The following installs the Senzing code and model data.
 The following brings up the docker formation seen in the
 [Overview](#overview).
 
+1. :thinking: **Optional:** make sure you have the latest version.
+   Example:
+
+    ```console
+    ${DOCKER_APP} pull senzing/docker-app-senzing-demo
+    ```
+
 1. Run docker-app.
    Example:
 
     ```console
     ${DOCKER_APP} render \
-      senzing/docker-app-senzing-demo:0.3.0 \
+      senzing/docker-app-senzing-demo \
       | docker-compose -f - up
     ```
 
