@@ -230,6 +230,8 @@ The server supports the
       | docker-compose -f - down
     ```
 
+1. All data was stored in
+
 ## Development
 
 The following steps are performed inside a local git repository directory for `docker-app-demo`.

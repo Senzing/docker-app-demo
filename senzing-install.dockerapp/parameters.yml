@@ -1,6 +1,6 @@
 SENZING_ACCEPT_EULA: false
 
-SENZING_DATA_DIR: ~/senzing-docker-app-demo/data
-SENZING_ETC_DIR:  ~/senzing-docker-app-demo/etc
-SENZING_G2_DIR:   ~/senzing-docker-app-demo/g2
-SENZING_VAR_DIR:  ~/senzing-docker-app-demo/var
+SENZING_DATA_DIR: ~/senzing-docker-app-demo/senzing/data
+SENZING_ETC_DIR:  ~/senzing-docker-app-demo/senzing/etc
+SENZING_G2_DIR:   ~/senzing-docker-app-demo/senzing/g2
+SENZING_VAR_DIR:  ~/senzing-docker-app-demo/senzing/var
