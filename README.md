@@ -45,7 +45,7 @@ This docker formation brings up the following docker containers:
 1. [Preparation](#preparation)
     1. [Prerequisite software](#prerequisite-software)
 1. [Using docker-app](#using-docker-app)
-    1. [Set environment variables(]#set-environment-variables)
+    1. [Set environment variables](#set-environment-variables)
     1. [EULA](#eula)
     1. [Install Senzing](#install-senzing)
     1. [Run docker formation](#run-docker-formation)
@@ -60,6 +60,7 @@ This docker formation brings up the following docker containers:
 1. [Advanced](#advanced)
     1. [Create parameters files](#create-parameters-files)
     1. [Using docker-app with parameters](#using-docker-app-with-parameters)
+    1. [Configuration](#configuration)
 1. [Development](#development)
 1. [References](#references)
 
@@ -118,6 +119,17 @@ The following software programs need to be installed:
     export DOCKER_APP="docker app"
     ```
 
+1. Test `DOCKER_APP`.
+   Example:
+
+    ```console
+    $ ${DOCKER_APP} -v
+
+    docker-app version v0.8.0, build 7eea32b7
+    ```
+
+   **Warning:** make sure it is not just the version of `Docker`.
+
 ### EULA
 
 To use the Senzing code, you must agree to the End User License Agreement (EULA).
@@ -132,13 +144,20 @@ To use the Senzing code, you must agree to the End User License Agreement (EULA)
 
 The following installs the Senzing code and model data.
 
+1. :thinking: **Optional:** make sure you have the latest version.
+   Example:
+
+    ```console
+    ${DOCKER_APP} pull senzing/docker-app-senzing-install
+    ```
+
 1. Run docker-app.
    Example:
 
     ```console
     ${DOCKER_APP} render \
       --set SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \
-      senzing/docker-app-senzing-install:0.3.0 \
+      senzing/docker-app-senzing-install \
       | docker-compose -f - up
     ```
 
@@ -149,12 +168,19 @@ The following installs the Senzing code and model data.
 The following brings up the docker formation seen in the
 [Overview](#overview).
 
+1. :thinking: **Optional:** make sure you have the latest version.
+   Example:
+
+    ```console
+    ${DOCKER_APP} pull senzing/docker-app-senzing-demo
+    ```
+
 1. Run docker-app.
    Example:
 
     ```console
     ${DOCKER_APP} render \
-      senzing/docker-app-senzing-demo:0.3.0 \
+      senzing/docker-app-senzing-demo \
       | docker-compose -f - up
     ```
 
@@ -218,18 +244,21 @@ The server supports the
 
 ## Cleanup
 
-1. Bring down docker formation.
+1. Bring down installation docker formation.
    Example:
 
     ```console
     ${DOCKER_APP} render \
-      senzing/docker-app-senzing-demo:0.3.0 \
+      senzing/docker-app-senzing-install \
       | docker-compose -f - down
     ```
 
+1. Bring down demonstration docker formation.
+   Example:
+
     ```console
     ${DOCKER_APP} render \
-      senzing/docker-app-senzing-install:0.3.0 \
+      senzing/docker-app-senzing-demo \
       | docker-compose -f - down
     ```
 
@@ -310,7 +339,7 @@ The following installs the Senzing code and model data.
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_INSTALL_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-install:0.3.0 \
+      senzing/docker-app-senzing-install \
       | docker-compose -f - up
     ```
 
@@ -325,9 +354,20 @@ The following brings up the docker formation seen in the
     ```console
     ${DOCKER_APP} render \
       --parameters-file "${DOCKER_APP_DEMO_PARAMETERS_FILE}" \
-      senzing/docker-app-senzing-demo:0.3.0 \
+      senzing/docker-app-senzing-demo \
       | docker-compose -f - up
     ```
+
+### Configuration
+
+1. [JUPYTER_NOTEBOOKS_SHARED_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#jupyter_notebooks_shared_dir)
+1. [POSTGRES_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#postgres_dir)
+1. [RABBITMQ_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#rabbitmq_dir)
+1. [SENZING_ACCEPT_EULA](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_accept_eula)
+1. [SENZING_DATA_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_data_dir)
+1. [SENZING_G2_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_g2_dir)
+1. [SENZING_ETC_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_etc_dir)
+1. [SENZING_VAR_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_var_dir)
 
 ## Development
 
@@ -339,7 +379,7 @@ The following steps are performed inside a local git repository directory for `d
        Example:
 
         ```console
-        export GIT_VERSION=0.3.0
+        export GIT_VERSION=1.0.0
         ```
 
     1. Pull version from Git repository.
@@ -375,17 +415,6 @@ The following steps are performed inside a local git repository directory for `d
           --tag senzing/docker-app-senzing-demo:${GIT_VERSION} \
           senzing-demo.dockerapp
         ```
-
-## Configuration
-
-1. [JUPYTER_NOTEBOOKS_SHARED_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#jupyter_notebooks_shared_dir)
-1. [POSTGRES_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#postgres_dir)
-1. [RABBITMQ_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#rabbitmq_dir)
-1. [SENZING_ACCEPT_EULA](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_accept_eula)
-1. [SENZING_DATA_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_data_dir)
-1. [SENZING_G2_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_g2_dir)
-1. [SENZING_ETC_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_etc_dir)
-1. [SENZING_VAR_DIR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_var_dir)
 
 ## References
 
