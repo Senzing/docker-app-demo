@@ -29,7 +29,7 @@ This docker formation brings up the following docker containers:
 1. *[senzing/entity-web-search-app](https://github.com/Senzing/entity-search-web-app)*
 1. *[senzing/init-container](https://github.com/Senzing/docker-init-container)*
 1. *[senzing/jupyter](https://github.com/Senzing/docker-jupyter)*
-1. *[senzing/mock-data-generator](https://github.com/Senzing/mock-data-generator)*
+1. *[senzing/stream-producer](https://github.com/Senzing/stream-producer)*
 1. *[senzing/phppgadmin](https://hub.docker.com/r/senzing/phppgadmin)*
 1. *[senzing/postgresql-client](https://github.com/Senzing/postgresql-client)*
 1. *[senzing/redoer](https://github.com/Senzing/redoer)*
