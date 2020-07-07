@@ -129,8 +129,8 @@ services:
     environment:
 #     See https://github.com/Senzing/docker-init-container#configuration
       SENZING_DATABASE_URL: "postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@senzing-postgres:5432/${POSTGRES_DB}"
-      SENZING_INIT_CONTAINER_SLEEP: 30
-    image: senzing/init-container:1.5.2
+      SENZING_INIT_CONTAINER_SLEEP: 60
+    image: senzing/init-container:1.5.5
     networks:
       - backend
     restart: on-failure
@@ -142,7 +142,7 @@ services:
 
   debug:
     container_name: senzing-debug
-    image: senzing/senzing-debug:1.3.0
+    image: senzing/senzing-debug:1.3.4
     networks:
       - backend
     restart: always
@@ -170,7 +170,7 @@ services:
       SENZING_RABBITMQ_QUEUE: senzing-rabbitmq-queue
       SENZING_RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
       SENZING_SUBCOMMAND: rabbitmq
-    image: senzing/stream-loader:1.5.3
+    image: senzing/stream-loader:1.5.4
     networks:
       - backend
     restart: always
@@ -189,7 +189,7 @@ services:
       SENZING_DELAY_IN_SECONDS: 60
       SENZING_MONITORING_PERIOD_IN_SECONDS: ${SENZING_MONITORING_PERIOD_IN_SECONDS}
       SENZING_SUBCOMMAND: redo
-    image: senzing/redoer:1.2.1
+    image: senzing/redoer:1.3.0
     networks:
       - backend
     privileged: true
@@ -216,7 +216,7 @@ services:
     environment:
 #     See https://github.com/Senzing/senzing-api-server#configuration
       SENZING_DATABASE_URL: "postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@senzing-postgres:5432/${POSTGRES_DB}"
-    image: senzing/senzing-api-server:1.7.10
+    image: senzing/senzing-api-server:1.8.3
     networks:
       - backend
     ports:
@@ -235,7 +235,7 @@ services:
 #     See https://github.com/Senzing/entity-search-web-app#configuration
       SENZING_API_SERVER_URL: "http://senzing-api-server:8250"
       SENZING_WEB_SERVER_PORT: 8251
-    image: senzing/entity-search-web-app:1.0.4
+    image: senzing/entity-search-web-app:1.2.1
     networks:
       - backend
     ports:
