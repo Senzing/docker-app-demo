@@ -403,6 +403,23 @@ The following steps are performed inside a local git repository directory for `d
 
         ```console
         ${DOCKER_APP} push \
+          --tag senzing/docker-app-senzing-install:latest \
+          senzing-install.dockerapp
+        ```
+
+    1. Push demo app.
+       Example:
+
+        ```console
+        ${DOCKER_APP} push \
+          --tag senzing/docker-app-senzing-demo:latest \
+          senzing-demo.dockerapp
+        ```
+    1. Push install app.
+       Example:
+
+        ```console
+        ${DOCKER_APP} push \
           --tag senzing/docker-app-senzing-install:${GIT_VERSION} \
           senzing-install.dockerapp
         ```
