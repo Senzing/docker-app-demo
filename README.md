@@ -217,7 +217,7 @@ The following brings up the docker formation seen in the
 
 View results from Senzing REST API server.
 The server supports the
-[Senzing REST API](https://github.com/Senzing/senzing-rest-api-specification-specification).
+[Senzing REST API](https://github.com/Senzing/senzing-rest-api-specification).
 
 1. View REST API using [OpenApi "Swagger" editor](http://editor.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api-specification/master/senzing-rest-api.yaml).
 1. Example Senzing REST API request:
