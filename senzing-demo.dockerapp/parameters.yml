@@ -9,7 +9,7 @@ RABBITMQ_USERNAME: user
 SENZING_DATA_DIR: ~/senzing-docker-app-demo/data
 SENZING_DATA_VERSION_DIR: ~/senzing-docker-app-demo/data/1.0.0
 SENZING_DATA_SOURCE: TEST
-SENZING_ENTITY_TYPE: TEST
+SENZING_ENTITY_TYPE: GENERIC
 SENZING_ETC_DIR:  ~/senzing-docker-app-demo/etc
 SENZING_G2_DIR:   ~/senzing-docker-app-demo/g2
 SENZING_INPUT_URL: "https://s3.amazonaws.com/public-read-access/TestDataSets/loadtest-dataset-1M.json"
