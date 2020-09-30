@@ -129,8 +129,8 @@ services:
     environment:
 #     See https://github.com/Senzing/docker-init-container#configuration
       SENZING_DATABASE_URL: "postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@senzing-postgres:5432/${POSTGRES_DB}"
-      SENZING_INIT_CONTAINER_SLEEP: 60
-    image: senzing/init-container:1.5.5
+      SENZING_DELAY_IN_SECONDS: 60
+    image: senzing/init-container:1.5.9
     networks:
       - backend
     restart: on-failure
