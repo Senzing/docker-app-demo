@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2020-09-30
+
+### Changed in 1.3.0
+
+- Using 2.0 versions of senzing-api-server and entity-search-web-app
+- Using newest version of senzing/ini-container that uses env vars consistent with other senzing images
+
 ## [1.2.0] - 2020-07-07
 
 ### Changed in 1.2.0
