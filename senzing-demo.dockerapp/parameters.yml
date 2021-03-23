@@ -14,7 +14,6 @@ SENZING_ETC_DIR:  ~/senzing-docker-app-demo/etc
 SENZING_G2_DIR:   ~/senzing-docker-app-demo/g2
 SENZING_INPUT_URL: "https://s3.amazonaws.com/public-read-access/TestDataSets/loadtest-dataset-1M.json"
 SENZING_MONITORING_PERIOD_IN_SECONDS: 600
-SENZING_PROCESSES: 1
 SENZING_THREADS_PER_PROCESS: 1
 SENZING_VAR_DIR:  ~/senzing-docker-app-demo/var
 
