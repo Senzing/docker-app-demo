@@ -7,7 +7,7 @@ RABBITMQ_DIR: ~/senzing-docker-app-demo/rabbitmq
 RABBITMQ_PASSWORD: bitnami
 RABBITMQ_USERNAME: user
 SENZING_DATA_DIR: ~/senzing-docker-app-demo/data
-SENZING_DATA_VERSION_DIR: ~/senzing-docker-app-demo/data/1.0.0
+SENZING_DATA_VERSION_DIR: ~/senzing-docker-app-demo/data/2.0.0
 SENZING_DATA_SOURCE: TEST
 SENZING_ENTITY_TYPE: GENERIC
 SENZING_ETC_DIR:  ~/senzing-docker-app-demo/etc

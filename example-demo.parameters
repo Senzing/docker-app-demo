@@ -3,7 +3,7 @@ POSTGRES_DIR:                 /var/senzing-docker-app-demo/postgres
 RABBITMQ_DIR:                 /var/senzing-docker-app-demo/rabbitmq
 
 SENZING_DATA_DIR:         /var/senzing-docker-app-demo/data
-SENZING_DATA_VERSION_DIR: /var/senzing-docker-app-demo/data/1.0.0
+SENZING_DATA_VERSION_DIR: /var/senzing-docker-app-demo/data/2.0.0
 SENZING_ETC_DIR:          /var/senzing-docker-app-demo/etc
 SENZING_G2_DIR:           /var/senzing-docker-app-demo/g2
 SENZING_VAR_DIR:          /var/senzing-docker-app-demo/var
